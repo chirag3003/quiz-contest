@@ -1,13 +1,25 @@
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { getQuizById } from "@/lib/data/demo-quizzes";
+import QuizPlayer from "@/components/quizzes/quiz-player";
 
 export async function generateMetadata({
   params,
 }: {
   params: { quizId: string };
 }) {
+  const { quizId } = params;
+  const quiz = getQuizById(quizId);
+  
+  if (!quiz) {
+    return {
+      title: 'Quiz Not Found',
+      description: "The requested quiz could not be found",
+    };
+  }
+  
   return {
-    title: 'Play Quiz | Quiz Contest',
+    title: `${quiz.title} | Quiz Contest`,
     description: "Take the quiz and test your knowledge",
   };
 }
@@ -19,15 +31,20 @@ export default function PlayQuizPage({
 }) {
   const { quizId } = params;
 
-  // TODO: Fetch quiz details and questions from database
   if (!quizId) {
     notFound();
   }
 
+  const quiz = getQuizById(quizId);
+  
+  if (!quiz) {
+    notFound();
+  }
+
   return (
-    <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-6">Play Quiz</h1>
-      {/* Quiz questions will be implemented here */}
+    <div className="container mx-auto py-8 px-4">
+      <h1 className="text-3xl font-bold mb-6">{quiz.title}</h1>
+      <QuizPlayer quiz={quiz} />
     </div>
   );
 }

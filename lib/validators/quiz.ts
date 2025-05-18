@@ -5,9 +5,10 @@ const QuestionTypeSchema = z.enum(['multiple-choice', 'true-false', 'fill-in-the
 
 // Define a schema for the structure of a single question
 const QuestionSchema = z.object({
-  id: z.string().uuid(), // Unique identifier for the question
+  id: z.string(), // Unique identifier for the question
   text: z.string().min(1, "Question text cannot be empty"), // The question itself
   type: QuestionTypeSchema, // The type of question
+  topic: z.string().optional(), // Topic classification for the question
   options: z.array(z.string()).optional(), // Options for multiple-choice questions
   correctAnswer: z.union([z.string(), z.array(z.string())]), // The correct answer(s)
   feedback: z.object({
@@ -15,6 +16,7 @@ const QuestionSchema = z.object({
     incorrect: z.string().optional(), // Feedback for an incorrect answer
   }).optional(),
   imageUrl: z.string().url().optional(), // Optional image URL for image-based questions
+  code: z.string().optional(), // Optional code snippet for programming questions
   // Add other fields as needed for different question types (e.g., blanks for fill-in-the-blank)
 });
 
@@ -25,7 +27,9 @@ const QuizSchema = z.object({
   description: z.string().optional(), // Optional description of the quiz
   topicsCovered: z.array(z.string()).optional(), // Clear learning objectives
   questions: z.array(QuestionSchema).min(1, "A quiz must have at least one question"), // Array of questions in the quiz
-  // Add other quiz-level configurations here, like time limits, etc.
+  timeLimit: z.number().int().positive().optional(), // Time limit in minutes
+  passingScore: z.number().int().min(0).max(100).default(70), // Passing score percentage
+  // Add other quiz-level configurations here
 });
 
 // Export the schema

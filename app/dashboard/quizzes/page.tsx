@@ -3,40 +3,20 @@
 import { useState } from "react";
 import { QuizFilters } from "@/components/quizzes/quiz-filters"
 import { QuizList } from "@/components/quizzes/quiz-list"
-
-// Demo quiz data
-const demoQuizzes = [
-  {
-    id: "1",
-    title: "JavaScript Fundamentals",
-    description: "Test your knowledge of JavaScript basics including variables, functions, and control structures",
-    topicsCovered: ["JavaScript", "Programming", "Web Development"],
-    questions: []
-  },
-  {
-    id: "2",
-    title: "React Basics",
-    description: "Quiz about React fundamentals including components, props, and state management",
-    topicsCovered: ["React", "Frontend", "JavaScript"],
-    questions: []
-  },
-  {
-    id: "3",
-    title: "Python Programming",
-    description: "Assess your Python programming skills with this comprehensive quiz",
-    topicsCovered: ["Python", "Programming", "Data Structures"],
-    questions: []
-  }
-];
+import { demoQuizzes } from "@/lib/data/demo-quizzes";
+import { Button } from "@/components/ui/button";
+import { Plus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 export default function QuizzesPage() {
+  const router = useRouter()
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
 
   // Filter quizzes based on search term and selected topic
   const filteredQuizzes = demoQuizzes.filter(quiz => {
     const matchesSearch = quiz.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      quiz.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      (quiz.description || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
       (quiz.topicsCovered || []).some(topic => topic.toLowerCase().includes(searchTerm.toLowerCase()));
     
     const matchesTopic = !selectedTopic || quiz.topicsCovered?.includes(selectedTopic);
@@ -47,7 +27,15 @@ export default function QuizzesPage() {
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">Quizzes</h1>
+        <h1 className="text-3xl font-bold">Quizzes</h1>
+        <Button 
+          variant="outline" 
+          className="gap-2"
+          onClick={() => {router.push("/dashboard/quizzes/create")}}
+         >
+          <Plus className="h-4 w-4" />
+          Create Custom Quiz
+        </Button>
       </div>
 
       <QuizFilters

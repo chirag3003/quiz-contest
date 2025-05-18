@@ -14,39 +14,38 @@ import {
   LogOut,
   Home,
 } from "lucide-react"
-import Image from "next/image"
 
 const navLinks = [
-  {
-    href: "/dashboard",
-    label: "Home",
-    icon: Home,
-  },
+  // {
+  //   href: "/dashboard/",
+  //   label: "Home",
+  //   icon: Home,
+  // },
   {
     href: "/dashboard/quizzes",
     label: "Quizzes",
     icon: LayoutGrid,
   },
-  {
-    href: "/dashboard/sessions",
-    label: "Sessions",
-    icon: BookOpen,
-  },
-  {
-    href: "/dashboard/results",
-    label: "Results",
-    icon: CheckCircle,
-  },
-  {
-    href: "/dashboard/masters",
-    label: "Masters",
-    icon: Users,
-  },
-  {
-    href: "/dashboard/feedback",
-    label: "Feedback",
-    icon: FileText,
-  },
+  // {
+  //   href: "/dashboard/sessions",
+  //   label: "Sessions",
+  //   icon: BookOpen,
+  // },
+  // {
+  //   href: "/dashboard/results",
+  //   label: "Results",
+  //   icon: CheckCircle,
+  // },
+  // {
+  //   href: "/dashboard/masters",
+  //   label: "Masters",
+  //   icon: Users,
+  // },
+  // {
+  //   href: "/dashboard/feedback",
+  //   label: "Feedback",
+  //   icon: FileText,
+  // },
 ]
 
 const Sidebar = () => {
