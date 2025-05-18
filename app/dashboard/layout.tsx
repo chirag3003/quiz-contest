@@ -16,10 +16,8 @@ export default function DashboardLayout({
       <div className="flex h-screen">
         <Sidebar />
         <div className="flex-1 flex flex-col">
-          <div className="md:hidden h-16 flex-shrink-0">
-            <div className="fixed top-0 left-0 right-0 h-16 bg-background/95 backdrop-blur-sm border-b flex items-center px-4 z-40 pl-16">
-              <h1 className="text-xl font-bold">Quiz Dashboard</h1>
-            </div>
+          <div className="flex items-center justify-between p-4 md:hidden">
+            <h1 className="text-xl font-bold">Quiz Dashboard</h1>
           </div>
           <main className="flex-1 overflow-y-auto p-6">
             {children}
