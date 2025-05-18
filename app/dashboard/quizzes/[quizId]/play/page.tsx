@@ -6,9 +6,9 @@ import QuizPlayer from "@/components/quizzes/quiz-player";
 export async function generateMetadata({
   params,
 }: {
-  params: { quizId: string };
+  params: Promise<{ quizId: string }>;
 }) {
-  const { quizId } = params;
+  const { quizId } = await params;
   const quiz = getQuizById(quizId);
   
   if (!quiz) {
@@ -24,12 +24,12 @@ export async function generateMetadata({
   };
 }
 
-export default function PlayQuizPage({
+export default async function PlayQuizPage({
   params,
 }: {
-  params: { quizId: string };
+  params: Promise<{ quizId: string }>;
 }) {
-  const { quizId } = params;
+  const { quizId } = await params;
 
   if (!quizId) {
     notFound();

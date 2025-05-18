@@ -25,9 +25,9 @@ export const metadata = {
 export default async function StartQuizPage({
   params,
 }: {
-  params: { quizId: string };
+  params: Promise<{ quizId: string }>;
 }) {
-  const { quizId } = params;
+  const { quizId } = await params;
 
   if (!quizId) {
     notFound();
