@@ -124,7 +124,7 @@ export default function QuizPlayer({ quiz }: QuizPlayerProps) {
     localStorage.setItem(`quiz-${quiz.id}-stats`, JSON.stringify(stats));
     
     // Navigate to results page (which you'd implement later)
-    router.push(`/dashboard/quizzes/${quiz.id}/results`);
+    router.push(`/dashboard/quizzes/${quiz.id}/result`);
   };
 
   const renderQuestion = (question: Question) => {
